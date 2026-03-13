@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { font-family: 'Inter', system-ui, sans-serif; }
+
+body {
+  background-color: #04090f;
+  color: #f1f5f9;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Leaflet dark override ── */
+.leaflet-container { background: #0d1b2e !important; border-radius: 1rem; }
+.leaflet-tile { filter: brightness(0.7) saturate(0.8); }
+.leaflet-control-attribution { display: none; }
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #070d1a; }
+::-webkit-scrollbar-thumb { background: #1a3a5c; border-radius: 4px; }
+
+/* ── Glass card ── */
+.glass {
+  background: rgba(13,27,46,0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(59,130,246,0.15);
+}
+
+/* ── Gradient text ── */
+.gradient-text {
+  background: linear-gradient(135deg, #60a5fa, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Status badge ── */
+.badge { @apply px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider; }
+.badge-received    { @apply bg-slate-800 text-slate-300 border border-slate-600; }
+.badge-dispatched  { @apply bg-blue-950 text-blue-300 border border-blue-700; }
+.badge-in_progress { @apply bg-amber-950 text-amber-300 border border-amber-700; }
+.badge-resolved    { @apply bg-emerald-950 text-emerald-300 border border-emerald-700; }
+.badge-critical    { @apply bg-red-950 text-red-300 border border-red-700; }
+.badge-moderate    { @apply bg-orange-950 text-orange-300 border border-orange-700; }
+.badge-minor       { @apply bg-slate-800 text-slate-300 border border-slate-600; }
+
+/* ── Animated grid background ── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── Input ── */
+.input {
+  @apply w-full bg-g-800 border border-g-600 text-white rounded-xl px-4 py-3 text-sm
+         placeholder-slate-500 focus:outline-none focus:border-g-blue transition;
+}
+
+/* ── Button ── */
+.btn-primary {
+  @apply bg-g-blue hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-xl
+         transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+}
+.btn-ghost {
+  @apply border border-g-600 text-slate-300 hover:border-g-blue hover:text-white
+         font-medium py-2.5 px-4 rounded-xl transition-all duration-200;
+}
+
+/* ── Pulse ring for live indicator ── */
+@keyframes ping-ring {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+.live-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: ping-ring 1.5s ease-out infinite;
+}
+.live-dot {
+  position: relative;
+  width: 8px; height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  display: inline-block;
+}
